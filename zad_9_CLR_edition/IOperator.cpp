@@ -4,7 +4,7 @@
 
 IOperator^ IOperator::ParseToken(String^ token)
 {
-	if (token == "+")
+	if (token == L"+")
 		return gcnew AdditionOperator();
 	else if (token == L"-")
 		return gcnew SubstractionOperator();
@@ -16,6 +16,10 @@ IOperator^ IOperator::ParseToken(String^ token)
 		return gcnew ModuloOperator();
 	else if (token == L"^")
 		return gcnew ExpotentiationOperator();
+	else if (token == L"base_log")
+		return gcnew BaseLogOperator();
+	else if (token == L"yroot")
+		return gcnew YRootOperator();
 
 	throw gcnew ParseException(L"Could not parse token: { " + token + L" }");
 }

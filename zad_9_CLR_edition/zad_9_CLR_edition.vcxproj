@@ -120,7 +120,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="Operators.cpp" />
     <ClCompile Include="Constant.cpp" />
     <ClCompile Include="Expression.cpp" />
@@ -144,6 +143,11 @@
     <ClInclude Include="IOperator.h" />
     <ClInclude Include="Exceptions.h" />
     <ClInclude Include="Functions.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FrmCalculator.resx">
+      <DependentUpon>FrmCalculator.h</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

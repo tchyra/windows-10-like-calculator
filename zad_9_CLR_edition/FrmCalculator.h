@@ -12,6 +12,8 @@
 using namespace System;
 using namespace System::Runtime::InteropServices;
 
+// this file contains the main form for the scientific calculator variant
+
 namespace zad9CLRedition
 {
 	using namespace std;
@@ -45,11 +47,10 @@ namespace zad9CLRedition
 		{
 			if (components) delete components;
 		}
-	private: System::Windows::Forms::TableLayoutPanel^ _tlpButtons;
-	protected:
 
 #pragma region control variables
 
+	private: System::Windows::Forms::TableLayoutPanel^ _tlpButtons;
 
 	private: System::Windows::Forms::Button^ _btn0;
 	private: System::Windows::Forms::Button^ _btn1;
@@ -104,8 +105,10 @@ namespace zad9CLRedition
 	private: System::Windows::Forms::Button^ _btn10ToX;
 	private: System::Windows::Forms::Button^ _btnLog;
 	private: System::Windows::Forms::Button^ _btnLn;
-	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ _btnLogYX;
+	private: System::Windows::Forms::Button^ _btnYRoot;
+
+
 
 
 
@@ -169,8 +172,8 @@ namespace zad9CLRedition
 			this->_btn10ToX = (gcnew System::Windows::Forms::Button());
 			this->_btnLog = (gcnew System::Windows::Forms::Button());
 			this->_btnLn = (gcnew System::Windows::Forms::Button());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->_btnLogYX = (gcnew System::Windows::Forms::Button());
+			this->_btnYRoot = (gcnew System::Windows::Forms::Button());
 			this->tableLayoutPanel2 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->_lblCurrentNum = (gcnew System::Windows::Forms::Label());
 			this->_lblCurrentExpr = (gcnew System::Windows::Forms::Label());
@@ -230,8 +233,8 @@ namespace zad9CLRedition
 			this->_tlpButtons->Controls->Add(this->_btn10ToX, 1, 4);
 			this->_tlpButtons->Controls->Add(this->_btnLog, 1, 5);
 			this->_tlpButtons->Controls->Add(this->_btnLn, 1, 6);
-			this->_tlpButtons->Controls->Add(this->button1, 0, 5);
-			this->_tlpButtons->Controls->Add(this->button2, 0, 3);
+			this->_tlpButtons->Controls->Add(this->_btnLogYX, 0, 5);
+			this->_tlpButtons->Controls->Add(this->_btnYRoot, 0, 3);
 			this->_tlpButtons->Location = System::Drawing::Point(8, 134);
 			this->_tlpButtons->Name = L"_tlpButtons";
 			this->_tlpButtons->RowCount = 7;
@@ -250,15 +253,21 @@ namespace zad9CLRedition
 			this->_btn0->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btn0->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btn0->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btn0->FlatAppearance->BorderSize = 0;
+			this->_btn0->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btn0->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(94)),
+				static_cast<System::Int32>(static_cast<System::Byte>(94)), static_cast<System::Int32>(static_cast<System::Byte>(94)));
+			this->_btn0->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btn0->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14, System::Drawing::FontStyle::Bold));
 			this->_btn0->Location = System::Drawing::Point(198, 255);
 			this->_btn0->Name = L"_btn0";
 			this->_btn0->Size = System::Drawing::Size(59, 39);
 			this->_btn0->TabIndex = 0;
 			this->_btn0->TabStop = false;
 			this->_btn0->Text = L"0";
-			this->_btn0->UseVisualStyleBackColor = true;
+			this->_btn0->UseVisualStyleBackColor = false;
 			this->_btn0->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnNumber_Click);
 			// 
 			// _btn1
@@ -266,15 +275,21 @@ namespace zad9CLRedition
 			this->_btn1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btn1->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btn1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btn1->FlatAppearance->BorderSize = 0;
+			this->_btn1->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btn1->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(94)),
+				static_cast<System::Int32>(static_cast<System::Byte>(94)), static_cast<System::Int32>(static_cast<System::Byte>(94)));
+			this->_btn1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btn1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14, System::Drawing::FontStyle::Bold));
 			this->_btn1->Location = System::Drawing::Point(133, 213);
 			this->_btn1->Name = L"_btn1";
 			this->_btn1->Size = System::Drawing::Size(59, 36);
 			this->_btn1->TabIndex = 0;
 			this->_btn1->TabStop = false;
 			this->_btn1->Text = L"1";
-			this->_btn1->UseVisualStyleBackColor = true;
+			this->_btn1->UseVisualStyleBackColor = false;
 			this->_btn1->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnNumber_Click);
 			// 
 			// _btn2
@@ -282,15 +297,21 @@ namespace zad9CLRedition
 			this->_btn2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btn2->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btn2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btn2->FlatAppearance->BorderSize = 0;
+			this->_btn2->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btn2->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(94)),
+				static_cast<System::Int32>(static_cast<System::Byte>(94)), static_cast<System::Int32>(static_cast<System::Byte>(94)));
+			this->_btn2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btn2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14, System::Drawing::FontStyle::Bold));
 			this->_btn2->Location = System::Drawing::Point(198, 213);
 			this->_btn2->Name = L"_btn2";
 			this->_btn2->Size = System::Drawing::Size(59, 36);
 			this->_btn2->TabIndex = 0;
 			this->_btn2->TabStop = false;
 			this->_btn2->Text = L"2";
-			this->_btn2->UseVisualStyleBackColor = true;
+			this->_btn2->UseVisualStyleBackColor = false;
 			this->_btn2->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnNumber_Click);
 			// 
 			// _btn3
@@ -298,15 +319,21 @@ namespace zad9CLRedition
 			this->_btn3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btn3->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btn3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btn3->FlatAppearance->BorderSize = 0;
+			this->_btn3->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btn3->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(94)),
+				static_cast<System::Int32>(static_cast<System::Byte>(94)), static_cast<System::Int32>(static_cast<System::Byte>(94)));
+			this->_btn3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btn3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14, System::Drawing::FontStyle::Bold));
 			this->_btn3->Location = System::Drawing::Point(263, 213);
 			this->_btn3->Name = L"_btn3";
 			this->_btn3->Size = System::Drawing::Size(59, 36);
 			this->_btn3->TabIndex = 0;
 			this->_btn3->TabStop = false;
 			this->_btn3->Text = L"3";
-			this->_btn3->UseVisualStyleBackColor = true;
+			this->_btn3->UseVisualStyleBackColor = false;
 			this->_btn3->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnNumber_Click);
 			// 
 			// _btn4
@@ -314,15 +341,21 @@ namespace zad9CLRedition
 			this->_btn4->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btn4->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btn4->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btn4->FlatAppearance->BorderSize = 0;
+			this->_btn4->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btn4->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(94)),
+				static_cast<System::Int32>(static_cast<System::Byte>(94)), static_cast<System::Int32>(static_cast<System::Byte>(94)));
+			this->_btn4->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btn4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14, System::Drawing::FontStyle::Bold));
 			this->_btn4->Location = System::Drawing::Point(133, 171);
 			this->_btn4->Name = L"_btn4";
 			this->_btn4->Size = System::Drawing::Size(59, 36);
 			this->_btn4->TabIndex = 0;
 			this->_btn4->TabStop = false;
 			this->_btn4->Text = L"4";
-			this->_btn4->UseVisualStyleBackColor = true;
+			this->_btn4->UseVisualStyleBackColor = false;
 			this->_btn4->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnNumber_Click);
 			// 
 			// _btn5
@@ -330,15 +363,21 @@ namespace zad9CLRedition
 			this->_btn5->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btn5->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btn5->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btn5->FlatAppearance->BorderSize = 0;
+			this->_btn5->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btn5->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(94)),
+				static_cast<System::Int32>(static_cast<System::Byte>(94)), static_cast<System::Int32>(static_cast<System::Byte>(94)));
+			this->_btn5->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btn5->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14, System::Drawing::FontStyle::Bold));
 			this->_btn5->Location = System::Drawing::Point(198, 171);
 			this->_btn5->Name = L"_btn5";
 			this->_btn5->Size = System::Drawing::Size(59, 36);
 			this->_btn5->TabIndex = 0;
 			this->_btn5->TabStop = false;
 			this->_btn5->Text = L"5";
-			this->_btn5->UseVisualStyleBackColor = true;
+			this->_btn5->UseVisualStyleBackColor = false;
 			this->_btn5->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnNumber_Click);
 			// 
 			// _btn6
@@ -346,15 +385,21 @@ namespace zad9CLRedition
 			this->_btn6->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btn6->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btn6->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btn6->FlatAppearance->BorderSize = 0;
+			this->_btn6->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btn6->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(94)),
+				static_cast<System::Int32>(static_cast<System::Byte>(94)), static_cast<System::Int32>(static_cast<System::Byte>(94)));
+			this->_btn6->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btn6->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14, System::Drawing::FontStyle::Bold));
 			this->_btn6->Location = System::Drawing::Point(263, 171);
 			this->_btn6->Name = L"_btn6";
 			this->_btn6->Size = System::Drawing::Size(59, 36);
 			this->_btn6->TabIndex = 0;
 			this->_btn6->TabStop = false;
 			this->_btn6->Text = L"6";
-			this->_btn6->UseVisualStyleBackColor = true;
+			this->_btn6->UseVisualStyleBackColor = false;
 			this->_btn6->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnNumber_Click);
 			// 
 			// _btn9
@@ -362,15 +407,21 @@ namespace zad9CLRedition
 			this->_btn9->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btn9->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btn9->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btn9->FlatAppearance->BorderSize = 0;
+			this->_btn9->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btn9->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(94)),
+				static_cast<System::Int32>(static_cast<System::Byte>(94)), static_cast<System::Int32>(static_cast<System::Byte>(94)));
+			this->_btn9->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btn9->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14, System::Drawing::FontStyle::Bold));
 			this->_btn9->Location = System::Drawing::Point(263, 129);
 			this->_btn9->Name = L"_btn9";
 			this->_btn9->Size = System::Drawing::Size(59, 36);
 			this->_btn9->TabIndex = 0;
 			this->_btn9->TabStop = false;
 			this->_btn9->Text = L"9";
-			this->_btn9->UseVisualStyleBackColor = true;
+			this->_btn9->UseVisualStyleBackColor = false;
 			this->_btn9->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnNumber_Click);
 			// 
 			// _btn8
@@ -378,15 +429,21 @@ namespace zad9CLRedition
 			this->_btn8->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btn8->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btn8->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btn8->FlatAppearance->BorderSize = 0;
+			this->_btn8->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btn8->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(94)),
+				static_cast<System::Int32>(static_cast<System::Byte>(94)), static_cast<System::Int32>(static_cast<System::Byte>(94)));
+			this->_btn8->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btn8->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14, System::Drawing::FontStyle::Bold));
 			this->_btn8->Location = System::Drawing::Point(198, 129);
 			this->_btn8->Name = L"_btn8";
 			this->_btn8->Size = System::Drawing::Size(59, 36);
 			this->_btn8->TabIndex = 0;
 			this->_btn8->TabStop = false;
 			this->_btn8->Text = L"8";
-			this->_btn8->UseVisualStyleBackColor = true;
+			this->_btn8->UseVisualStyleBackColor = false;
 			this->_btn8->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnNumber_Click);
 			// 
 			// _btn7
@@ -394,15 +451,21 @@ namespace zad9CLRedition
 			this->_btn7->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btn7->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btn7->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btn7->FlatAppearance->BorderSize = 0;
+			this->_btn7->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btn7->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(94)),
+				static_cast<System::Int32>(static_cast<System::Byte>(94)), static_cast<System::Int32>(static_cast<System::Byte>(94)));
+			this->_btn7->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btn7->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14, System::Drawing::FontStyle::Bold));
 			this->_btn7->Location = System::Drawing::Point(133, 129);
 			this->_btn7->Name = L"_btn7";
 			this->_btn7->Size = System::Drawing::Size(59, 36);
 			this->_btn7->TabIndex = 0;
 			this->_btn7->TabStop = false;
 			this->_btn7->Text = L"7";
-			this->_btn7->UseVisualStyleBackColor = true;
+			this->_btn7->UseVisualStyleBackColor = false;
 			this->_btn7->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnNumber_Click);
 			// 
 			// _btnPoint
@@ -410,15 +473,21 @@ namespace zad9CLRedition
 			this->_btnPoint->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnPoint->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnPoint->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnPoint->FlatAppearance->BorderSize = 0;
+			this->_btnPoint->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnPoint->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(94)),
+				static_cast<System::Int32>(static_cast<System::Byte>(94)), static_cast<System::Int32>(static_cast<System::Byte>(94)));
+			this->_btnPoint->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnPoint->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14, System::Drawing::FontStyle::Bold));
 			this->_btnPoint->Location = System::Drawing::Point(263, 255);
 			this->_btnPoint->Name = L"_btnPoint";
 			this->_btnPoint->Size = System::Drawing::Size(59, 39);
 			this->_btnPoint->TabIndex = 0;
 			this->_btnPoint->TabStop = false;
 			this->_btnPoint->Text = L".";
-			this->_btnPoint->UseVisualStyleBackColor = true;
+			this->_btnPoint->UseVisualStyleBackColor = false;
 			this->_btnPoint->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnPoint_Click);
 			// 
 			// _btnPlusMinus
@@ -426,15 +495,21 @@ namespace zad9CLRedition
 			this->_btnPlusMinus->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnPlusMinus->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnPlusMinus->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnPlusMinus->FlatAppearance->BorderSize = 0;
+			this->_btnPlusMinus->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnPlusMinus->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(94)),
+				static_cast<System::Int32>(static_cast<System::Byte>(94)), static_cast<System::Int32>(static_cast<System::Byte>(94)));
+			this->_btnPlusMinus->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnPlusMinus->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14, System::Drawing::FontStyle::Bold));
 			this->_btnPlusMinus->Location = System::Drawing::Point(133, 255);
 			this->_btnPlusMinus->Name = L"_btnPlusMinus";
 			this->_btnPlusMinus->Size = System::Drawing::Size(59, 39);
 			this->_btnPlusMinus->TabIndex = 0;
 			this->_btnPlusMinus->TabStop = false;
 			this->_btnPlusMinus->Text = L"±";
-			this->_btnPlusMinus->UseVisualStyleBackColor = true;
+			this->_btnPlusMinus->UseVisualStyleBackColor = false;
 			this->_btnPlusMinus->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnPlusMinus_Click);
 			// 
 			// _btnMultiply
@@ -442,15 +517,21 @@ namespace zad9CLRedition
 			this->_btnMultiply->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnMultiply->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnMultiply->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnMultiply->FlatAppearance->BorderSize = 0;
+			this->_btnMultiply->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnMultiply->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnMultiply->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnMultiply->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14));
 			this->_btnMultiply->Location = System::Drawing::Point(328, 129);
 			this->_btnMultiply->Name = L"_btnMultiply";
 			this->_btnMultiply->Size = System::Drawing::Size(61, 36);
 			this->_btnMultiply->TabIndex = 0;
 			this->_btnMultiply->TabStop = false;
 			this->_btnMultiply->Text = L"×";
-			this->_btnMultiply->UseVisualStyleBackColor = true;
+			this->_btnMultiply->UseVisualStyleBackColor = false;
 			this->_btnMultiply->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnMultiply_Click);
 			// 
 			// _btnMinus
@@ -458,15 +539,21 @@ namespace zad9CLRedition
 			this->_btnMinus->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnMinus->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnMinus->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnMinus->FlatAppearance->BorderSize = 0;
+			this->_btnMinus->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnMinus->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnMinus->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnMinus->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14));
 			this->_btnMinus->Location = System::Drawing::Point(328, 171);
 			this->_btnMinus->Name = L"_btnMinus";
 			this->_btnMinus->Size = System::Drawing::Size(61, 36);
 			this->_btnMinus->TabIndex = 0;
 			this->_btnMinus->TabStop = false;
 			this->_btnMinus->Text = L"−";
-			this->_btnMinus->UseVisualStyleBackColor = true;
+			this->_btnMinus->UseVisualStyleBackColor = false;
 			this->_btnMinus->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnMinus_Click);
 			// 
 			// _btnPlus
@@ -474,15 +561,21 @@ namespace zad9CLRedition
 			this->_btnPlus->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnPlus->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnPlus->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnPlus->FlatAppearance->BorderSize = 0;
+			this->_btnPlus->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnPlus->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnPlus->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnPlus->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14));
 			this->_btnPlus->Location = System::Drawing::Point(328, 213);
 			this->_btnPlus->Name = L"_btnPlus";
 			this->_btnPlus->Size = System::Drawing::Size(61, 36);
 			this->_btnPlus->TabIndex = 0;
 			this->_btnPlus->TabStop = false;
 			this->_btnPlus->Text = L"+";
-			this->_btnPlus->UseVisualStyleBackColor = true;
+			this->_btnPlus->UseVisualStyleBackColor = false;
 			this->_btnPlus->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnPlus_Click);
 			// 
 			// _btnEquals
@@ -490,15 +583,22 @@ namespace zad9CLRedition
 			this->_btnEquals->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnEquals->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnEquals->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(69)), static_cast<System::Int32>(static_cast<System::Byte>(98)),
+				static_cast<System::Int32>(static_cast<System::Byte>(128)));
+			this->_btnEquals->FlatAppearance->BorderSize = 0;
+			this->_btnEquals->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)),
+				static_cast<System::Int32>(static_cast<System::Byte>(35)), static_cast<System::Int32>(static_cast<System::Byte>(46)));
+			this->_btnEquals->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(91)),
+				static_cast<System::Int32>(static_cast<System::Byte>(134)), static_cast<System::Int32>(static_cast<System::Byte>(179)));
+			this->_btnEquals->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnEquals->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14));
 			this->_btnEquals->Location = System::Drawing::Point(328, 255);
 			this->_btnEquals->Name = L"_btnEquals";
 			this->_btnEquals->Size = System::Drawing::Size(61, 39);
 			this->_btnEquals->TabIndex = 0;
 			this->_btnEquals->TabStop = false;
 			this->_btnEquals->Text = L"=";
-			this->_btnEquals->UseVisualStyleBackColor = true;
+			this->_btnEquals->UseVisualStyleBackColor = false;
 			this->_btnEquals->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnEquals_Click);
 			// 
 			// _btnDivide
@@ -506,15 +606,21 @@ namespace zad9CLRedition
 			this->_btnDivide->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnDivide->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnDivide->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnDivide->FlatAppearance->BorderSize = 0;
+			this->_btnDivide->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnDivide->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnDivide->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnDivide->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14));
 			this->_btnDivide->Location = System::Drawing::Point(328, 87);
 			this->_btnDivide->Name = L"_btnDivide";
 			this->_btnDivide->Size = System::Drawing::Size(61, 36);
 			this->_btnDivide->TabIndex = 0;
 			this->_btnDivide->TabStop = false;
 			this->_btnDivide->Text = L"÷";
-			this->_btnDivide->UseVisualStyleBackColor = true;
+			this->_btnDivide->UseVisualStyleBackColor = false;
 			this->_btnDivide->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnDivide_Click);
 			// 
 			// _btnBackspace
@@ -522,15 +628,21 @@ namespace zad9CLRedition
 			this->_btnBackspace->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnBackspace->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnBackspace->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnBackspace->FlatAppearance->BorderSize = 0;
+			this->_btnBackspace->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnBackspace->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnBackspace->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnBackspace->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnBackspace->Location = System::Drawing::Point(328, 3);
 			this->_btnBackspace->Name = L"_btnBackspace";
 			this->_btnBackspace->Size = System::Drawing::Size(61, 36);
 			this->_btnBackspace->TabIndex = 0;
 			this->_btnBackspace->TabStop = false;
 			this->_btnBackspace->Text = L"←";
-			this->_btnBackspace->UseVisualStyleBackColor = true;
+			this->_btnBackspace->UseVisualStyleBackColor = false;
 			this->_btnBackspace->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnBackspace_Click);
 			// 
 			// _btnModulo
@@ -538,15 +650,21 @@ namespace zad9CLRedition
 			this->_btnModulo->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnModulo->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnModulo->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnModulo->FlatAppearance->BorderSize = 0;
+			this->_btnModulo->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnModulo->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnModulo->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnModulo->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnModulo->Location = System::Drawing::Point(328, 45);
 			this->_btnModulo->Name = L"_btnModulo";
 			this->_btnModulo->Size = System::Drawing::Size(61, 36);
 			this->_btnModulo->TabIndex = 0;
 			this->_btnModulo->TabStop = false;
 			this->_btnModulo->Text = L"mod";
-			this->_btnModulo->UseVisualStyleBackColor = true;
+			this->_btnModulo->UseVisualStyleBackColor = false;
 			this->_btnModulo->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnModulo_Click);
 			// 
 			// _btnCE
@@ -554,15 +672,21 @@ namespace zad9CLRedition
 			this->_btnCE->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnCE->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnCE->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnCE->FlatAppearance->BorderSize = 0;
+			this->_btnCE->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnCE->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnCE->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnCE->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnCE->Location = System::Drawing::Point(263, 3);
 			this->_btnCE->Name = L"_btnCE";
 			this->_btnCE->Size = System::Drawing::Size(59, 36);
 			this->_btnCE->TabIndex = 0;
 			this->_btnCE->TabStop = false;
 			this->_btnCE->Text = L"CE";
-			this->_btnCE->UseVisualStyleBackColor = true;
+			this->_btnCE->UseVisualStyleBackColor = false;
 			this->_btnCE->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnCE_Click);
 			// 
 			// _btnInvert
@@ -570,15 +694,21 @@ namespace zad9CLRedition
 			this->_btnInvert->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnInvert->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnInvert->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnInvert->FlatAppearance->BorderSize = 0;
+			this->_btnInvert->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnInvert->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnInvert->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnInvert->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnInvert->Location = System::Drawing::Point(133, 45);
 			this->_btnInvert->Name = L"_btnInvert";
 			this->_btnInvert->Size = System::Drawing::Size(59, 36);
 			this->_btnInvert->TabIndex = 0;
 			this->_btnInvert->TabStop = false;
-			this->_btnInvert->Text = L"^-1";
-			this->_btnInvert->UseVisualStyleBackColor = true;
+			this->_btnInvert->Text = L"1/x";
+			this->_btnInvert->UseVisualStyleBackColor = false;
 			this->_btnInvert->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnInvert_Click);
 			// 
 			// _btnExp
@@ -586,15 +716,21 @@ namespace zad9CLRedition
 			this->_btnExp->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnExp->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnExp->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnExp->FlatAppearance->BorderSize = 0;
+			this->_btnExp->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnExp->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnExp->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnExp->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnExp->Location = System::Drawing::Point(263, 45);
 			this->_btnExp->Name = L"_btnExp";
 			this->_btnExp->Size = System::Drawing::Size(59, 36);
 			this->_btnExp->TabIndex = 0;
 			this->_btnExp->TabStop = false;
 			this->_btnExp->Text = L"exp";
-			this->_btnExp->UseVisualStyleBackColor = true;
+			this->_btnExp->UseVisualStyleBackColor = false;
 			this->_btnExp->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnExp_Click);
 			// 
 			// _btnAbs
@@ -602,15 +738,21 @@ namespace zad9CLRedition
 			this->_btnAbs->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnAbs->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnAbs->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnAbs->FlatAppearance->BorderSize = 0;
+			this->_btnAbs->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnAbs->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnAbs->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnAbs->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnAbs->Location = System::Drawing::Point(198, 45);
 			this->_btnAbs->Name = L"_btnAbs";
 			this->_btnAbs->Size = System::Drawing::Size(59, 36);
 			this->_btnAbs->TabIndex = 0;
 			this->_btnAbs->TabStop = false;
 			this->_btnAbs->Text = L"|x|";
-			this->_btnAbs->UseVisualStyleBackColor = true;
+			this->_btnAbs->UseVisualStyleBackColor = false;
 			this->_btnAbs->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnAbs_Click);
 			// 
 			// _btnFactorial
@@ -618,15 +760,21 @@ namespace zad9CLRedition
 			this->_btnFactorial->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnFactorial->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnFactorial->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnFactorial->FlatAppearance->BorderSize = 0;
+			this->_btnFactorial->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnFactorial->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnFactorial->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnFactorial->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnFactorial->Location = System::Drawing::Point(263, 87);
 			this->_btnFactorial->Name = L"_btnFactorial";
 			this->_btnFactorial->Size = System::Drawing::Size(59, 36);
 			this->_btnFactorial->TabIndex = 0;
 			this->_btnFactorial->TabStop = false;
 			this->_btnFactorial->Text = L"n!";
-			this->_btnFactorial->UseVisualStyleBackColor = true;
+			this->_btnFactorial->UseVisualStyleBackColor = false;
 			this->_btnFactorial->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnFactorial_Click);
 			// 
 			// _btnRightParenthesis
@@ -634,15 +782,21 @@ namespace zad9CLRedition
 			this->_btnRightParenthesis->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnRightParenthesis->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnRightParenthesis->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnRightParenthesis->FlatAppearance->BorderSize = 0;
+			this->_btnRightParenthesis->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnRightParenthesis->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnRightParenthesis->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnRightParenthesis->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnRightParenthesis->Location = System::Drawing::Point(198, 87);
 			this->_btnRightParenthesis->Name = L"_btnRightParenthesis";
 			this->_btnRightParenthesis->Size = System::Drawing::Size(59, 36);
 			this->_btnRightParenthesis->TabIndex = 0;
 			this->_btnRightParenthesis->TabStop = false;
 			this->_btnRightParenthesis->Text = L")";
-			this->_btnRightParenthesis->UseVisualStyleBackColor = true;
+			this->_btnRightParenthesis->UseVisualStyleBackColor = false;
 			this->_btnRightParenthesis->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnRightParenthesis_Click);
 			// 
 			// _btnLeftParenthesis
@@ -650,15 +804,21 @@ namespace zad9CLRedition
 			this->_btnLeftParenthesis->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnLeftParenthesis->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnLeftParenthesis->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnLeftParenthesis->FlatAppearance->BorderSize = 0;
+			this->_btnLeftParenthesis->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnLeftParenthesis->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnLeftParenthesis->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnLeftParenthesis->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnLeftParenthesis->Location = System::Drawing::Point(133, 87);
 			this->_btnLeftParenthesis->Name = L"_btnLeftParenthesis";
 			this->_btnLeftParenthesis->Size = System::Drawing::Size(59, 36);
 			this->_btnLeftParenthesis->TabIndex = 0;
 			this->_btnLeftParenthesis->TabStop = false;
 			this->_btnLeftParenthesis->Text = L"(";
-			this->_btnLeftParenthesis->UseVisualStyleBackColor = true;
+			this->_btnLeftParenthesis->UseVisualStyleBackColor = false;
 			this->_btnLeftParenthesis->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnLeftParenthesis_Click);
 			// 
 			// _btn2ndOn
@@ -666,15 +826,21 @@ namespace zad9CLRedition
 			this->_btn2ndOn->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btn2ndOn->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btn2ndOn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btn2ndOn->FlatAppearance->BorderSize = 0;
+			this->_btn2ndOn->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btn2ndOn->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btn2ndOn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btn2ndOn->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btn2ndOn->Location = System::Drawing::Point(68, 3);
 			this->_btn2ndOn->Name = L"_btn2ndOn";
 			this->_btn2ndOn->Size = System::Drawing::Size(59, 36);
 			this->_btn2ndOn->TabIndex = 0;
 			this->_btn2ndOn->TabStop = false;
 			this->_btn2ndOn->Text = L"2nd";
-			this->_btn2ndOn->UseVisualStyleBackColor = true;
+			this->_btn2ndOn->UseVisualStyleBackColor = false;
 			this->_btn2ndOn->Click += gcnew System::EventHandler(this, &FrmCalculator::_btn2ndOn_Click);
 			// 
 			// _btnPow
@@ -682,15 +848,21 @@ namespace zad9CLRedition
 			this->_btnPow->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnPow->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnPow->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnPow->FlatAppearance->BorderSize = 0;
+			this->_btnPow->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnPow->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnPow->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnPow->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnPow->Location = System::Drawing::Point(68, 129);
 			this->_btnPow->Name = L"_btnPow";
 			this->_btnPow->Size = System::Drawing::Size(59, 36);
 			this->_btnPow->TabIndex = 0;
 			this->_btnPow->TabStop = false;
 			this->_btnPow->Text = L"x^y";
-			this->_btnPow->UseVisualStyleBackColor = true;
+			this->_btnPow->UseVisualStyleBackColor = false;
 			this->_btnPow->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnPow_Click);
 			// 
 			// _btnE
@@ -698,15 +870,21 @@ namespace zad9CLRedition
 			this->_btnE->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnE->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnE->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnE->FlatAppearance->BorderSize = 0;
+			this->_btnE->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnE->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnE->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnE->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnE->Location = System::Drawing::Point(198, 3);
 			this->_btnE->Name = L"_btnE";
 			this->_btnE->Size = System::Drawing::Size(59, 36);
 			this->_btnE->TabIndex = 0;
 			this->_btnE->TabStop = false;
 			this->_btnE->Text = L"e";
-			this->_btnE->UseVisualStyleBackColor = true;
+			this->_btnE->UseVisualStyleBackColor = false;
 			this->_btnE->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnE_Click);
 			// 
 			// _btnPi
@@ -714,15 +892,21 @@ namespace zad9CLRedition
 			this->_btnPi->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnPi->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnPi->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnPi->FlatAppearance->BorderSize = 0;
+			this->_btnPi->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnPi->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnPi->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnPi->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnPi->Location = System::Drawing::Point(133, 3);
 			this->_btnPi->Name = L"_btnPi";
 			this->_btnPi->Size = System::Drawing::Size(59, 36);
 			this->_btnPi->TabIndex = 0;
 			this->_btnPi->TabStop = false;
 			this->_btnPi->Text = L"π";
-			this->_btnPi->UseVisualStyleBackColor = true;
+			this->_btnPi->UseVisualStyleBackColor = false;
 			this->_btnPi->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnPi_Click);
 			// 
 			// _btn2ndOff
@@ -730,15 +914,22 @@ namespace zad9CLRedition
 			this->_btn2ndOff->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btn2ndOff->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btn2ndOff->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(69)), static_cast<System::Int32>(static_cast<System::Byte>(98)),
+				static_cast<System::Int32>(static_cast<System::Byte>(128)));
+			this->_btn2ndOff->FlatAppearance->BorderSize = 0;
+			this->_btn2ndOff->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)),
+				static_cast<System::Int32>(static_cast<System::Byte>(35)), static_cast<System::Int32>(static_cast<System::Byte>(46)));
+			this->_btn2ndOff->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(91)),
+				static_cast<System::Int32>(static_cast<System::Byte>(134)), static_cast<System::Int32>(static_cast<System::Byte>(179)));
+			this->_btn2ndOff->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btn2ndOff->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btn2ndOff->Location = System::Drawing::Point(3, 3);
 			this->_btn2ndOff->Name = L"_btn2ndOff";
 			this->_btn2ndOff->Size = System::Drawing::Size(59, 36);
 			this->_btn2ndOff->TabIndex = 0;
 			this->_btn2ndOff->TabStop = false;
-			this->_btn2ndOff->Text = L"1st";
-			this->_btn2ndOff->UseVisualStyleBackColor = true;
+			this->_btn2ndOff->Text = L"2nd";
+			this->_btn2ndOff->UseVisualStyleBackColor = false;
 			this->_btn2ndOff->Click += gcnew System::EventHandler(this, &FrmCalculator::_btn2ndOff_Click);
 			// 
 			// _btnSqrt
@@ -746,15 +937,21 @@ namespace zad9CLRedition
 			this->_btnSqrt->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnSqrt->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnSqrt->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnSqrt->FlatAppearance->BorderSize = 0;
+			this->_btnSqrt->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnSqrt->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnSqrt->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnSqrt->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnSqrt->Location = System::Drawing::Point(3, 45);
 			this->_btnSqrt->Name = L"_btnSqrt";
 			this->_btnSqrt->Size = System::Drawing::Size(59, 36);
 			this->_btnSqrt->TabIndex = 0;
 			this->_btnSqrt->TabStop = false;
 			this->_btnSqrt->Text = L"^1/2";
-			this->_btnSqrt->UseVisualStyleBackColor = true;
+			this->_btnSqrt->UseVisualStyleBackColor = false;
 			this->_btnSqrt->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnSqrt_Click);
 			// 
 			// _btnCubeRoot
@@ -762,14 +959,21 @@ namespace zad9CLRedition
 			this->_btnCubeRoot->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnCubeRoot->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnCubeRoot->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnCubeRoot->FlatAppearance->BorderSize = 0;
+			this->_btnCubeRoot->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnCubeRoot->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnCubeRoot->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnCubeRoot->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnCubeRoot->Location = System::Drawing::Point(3, 87);
 			this->_btnCubeRoot->Name = L"_btnCubeRoot";
 			this->_btnCubeRoot->Size = System::Drawing::Size(59, 36);
 			this->_btnCubeRoot->TabIndex = 0;
+			this->_btnCubeRoot->TabStop = false;
 			this->_btnCubeRoot->Text = L"^1/3";
-			this->_btnCubeRoot->UseVisualStyleBackColor = true;
+			this->_btnCubeRoot->UseVisualStyleBackColor = false;
 			this->_btnCubeRoot->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnCubeRoot_Click);
 			// 
 			// _btn2ToX
@@ -777,14 +981,21 @@ namespace zad9CLRedition
 			this->_btn2ToX->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btn2ToX->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btn2ToX->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btn2ToX->FlatAppearance->BorderSize = 0;
+			this->_btn2ToX->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btn2ToX->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btn2ToX->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btn2ToX->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btn2ToX->Location = System::Drawing::Point(3, 171);
 			this->_btn2ToX->Name = L"_btn2ToX";
 			this->_btn2ToX->Size = System::Drawing::Size(59, 36);
 			this->_btn2ToX->TabIndex = 0;
+			this->_btn2ToX->TabStop = false;
 			this->_btn2ToX->Text = L"2^x";
-			this->_btn2ToX->UseVisualStyleBackColor = true;
+			this->_btn2ToX->UseVisualStyleBackColor = false;
 			this->_btn2ToX->Click += gcnew System::EventHandler(this, &FrmCalculator::_btn2ToX_Click);
 			// 
 			// _btnEToX
@@ -792,14 +1003,21 @@ namespace zad9CLRedition
 			this->_btnEToX->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnEToX->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnEToX->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnEToX->FlatAppearance->BorderSize = 0;
+			this->_btnEToX->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnEToX->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnEToX->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnEToX->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnEToX->Location = System::Drawing::Point(3, 255);
 			this->_btnEToX->Name = L"_btnEToX";
 			this->_btnEToX->Size = System::Drawing::Size(59, 39);
 			this->_btnEToX->TabIndex = 0;
+			this->_btnEToX->TabStop = false;
 			this->_btnEToX->Text = L"e^x";
-			this->_btnEToX->UseVisualStyleBackColor = true;
+			this->_btnEToX->UseVisualStyleBackColor = false;
 			this->_btnEToX->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnEToX_Click);
 			// 
 			// _btnSqr
@@ -807,15 +1025,21 @@ namespace zad9CLRedition
 			this->_btnSqr->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnSqr->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnSqr->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnSqr->FlatAppearance->BorderSize = 0;
+			this->_btnSqr->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnSqr->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnSqr->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnSqr->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnSqr->Location = System::Drawing::Point(68, 45);
 			this->_btnSqr->Name = L"_btnSqr";
 			this->_btnSqr->Size = System::Drawing::Size(59, 36);
 			this->_btnSqr->TabIndex = 0;
 			this->_btnSqr->TabStop = false;
 			this->_btnSqr->Text = L"x^2";
-			this->_btnSqr->UseVisualStyleBackColor = true;
+			this->_btnSqr->UseVisualStyleBackColor = false;
 			this->_btnSqr->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnSqr_Click);
 			// 
 			// _btnCube
@@ -823,15 +1047,21 @@ namespace zad9CLRedition
 			this->_btnCube->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnCube->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnCube->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnCube->FlatAppearance->BorderSize = 0;
+			this->_btnCube->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnCube->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnCube->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnCube->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnCube->Location = System::Drawing::Point(68, 87);
 			this->_btnCube->Name = L"_btnCube";
 			this->_btnCube->Size = System::Drawing::Size(59, 36);
 			this->_btnCube->TabIndex = 0;
 			this->_btnCube->TabStop = false;
 			this->_btnCube->Text = L"x^3";
-			this->_btnCube->UseVisualStyleBackColor = true;
+			this->_btnCube->UseVisualStyleBackColor = false;
 			this->_btnCube->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnCube_Click);
 			// 
 			// _btn10ToX
@@ -839,15 +1069,21 @@ namespace zad9CLRedition
 			this->_btn10ToX->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btn10ToX->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btn10ToX->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btn10ToX->FlatAppearance->BorderSize = 0;
+			this->_btn10ToX->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btn10ToX->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btn10ToX->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btn10ToX->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btn10ToX->Location = System::Drawing::Point(68, 171);
 			this->_btn10ToX->Name = L"_btn10ToX";
 			this->_btn10ToX->Size = System::Drawing::Size(59, 36);
 			this->_btn10ToX->TabIndex = 0;
 			this->_btn10ToX->TabStop = false;
 			this->_btn10ToX->Text = L"10^x";
-			this->_btn10ToX->UseVisualStyleBackColor = true;
+			this->_btn10ToX->UseVisualStyleBackColor = false;
 			this->_btn10ToX->Click += gcnew System::EventHandler(this, &FrmCalculator::_btn10ToX_Click);
 			// 
 			// _btnLog
@@ -855,15 +1091,21 @@ namespace zad9CLRedition
 			this->_btnLog->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnLog->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnLog->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnLog->FlatAppearance->BorderSize = 0;
+			this->_btnLog->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnLog->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnLog->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnLog->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnLog->Location = System::Drawing::Point(68, 213);
 			this->_btnLog->Name = L"_btnLog";
 			this->_btnLog->Size = System::Drawing::Size(59, 36);
 			this->_btnLog->TabIndex = 0;
 			this->_btnLog->TabStop = false;
 			this->_btnLog->Text = L"log";
-			this->_btnLog->UseVisualStyleBackColor = true;
+			this->_btnLog->UseVisualStyleBackColor = false;
 			this->_btnLog->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnLog_Click);
 			// 
 			// _btnLn
@@ -871,46 +1113,66 @@ namespace zad9CLRedition
 			this->_btnLn->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_btnLn->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
+			this->_btnLn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnLn->FlatAppearance->BorderSize = 0;
+			this->_btnLn->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnLn->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnLn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnLn->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
 			this->_btnLn->Location = System::Drawing::Point(68, 255);
 			this->_btnLn->Name = L"_btnLn";
 			this->_btnLn->Size = System::Drawing::Size(59, 39);
 			this->_btnLn->TabIndex = 0;
 			this->_btnLn->TabStop = false;
 			this->_btnLn->Text = L"ln";
-			this->_btnLn->UseVisualStyleBackColor = true;
+			this->_btnLn->UseVisualStyleBackColor = false;
 			this->_btnLn->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnLn_Click);
 			// 
-			// button1
+			// _btnLogYX
 			// 
-			this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+			this->_btnLogYX->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->button1->Font = (gcnew System::Drawing::Font(L"Consolas", 10, System::Drawing::FontStyle::Bold));
-			this->button1->Location = System::Drawing::Point(3, 213);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(59, 36);
-			this->button1->TabIndex = 0;
-			this->button1->TabStop = false;
-			this->button1->Text = L"logyx";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &FrmCalculator::button1_Click);
+			this->_btnLogYX->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnLogYX->FlatAppearance->BorderSize = 0;
+			this->_btnLogYX->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnLogYX->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnLogYX->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnLogYX->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
+			this->_btnLogYX->Location = System::Drawing::Point(3, 213);
+			this->_btnLogYX->Name = L"_btnLogYX";
+			this->_btnLogYX->Size = System::Drawing::Size(59, 36);
+			this->_btnLogYX->TabIndex = 0;
+			this->_btnLogYX->TabStop = false;
+			this->_btnLogYX->Text = L"logyx";
+			this->_btnLogYX->UseVisualStyleBackColor = false;
+			this->_btnLogYX->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnLogYX_Click);
 			// 
-			// button2
+			// _btnYRoot
 			// 
-			this->button2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+			this->_btnYRoot->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->button2->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold));
-			this->button2->Location = System::Drawing::Point(3, 129);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(59, 36);
-			this->button2->TabIndex = 0;
-			this->button2->TabStop = false;
-			this->button2->Text = L"^1/y";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &FrmCalculator::button2_Click);
+			this->_btnYRoot->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(31)), static_cast<System::Int32>(static_cast<System::Byte>(31)),
+				static_cast<System::Int32>(static_cast<System::Byte>(31)));
+			this->_btnYRoot->FlatAppearance->BorderSize = 0;
+			this->_btnYRoot->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
+			this->_btnYRoot->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(51)),
+				static_cast<System::Int32>(static_cast<System::Byte>(51)), static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			this->_btnYRoot->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_btnYRoot->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
+			this->_btnYRoot->Location = System::Drawing::Point(3, 129);
+			this->_btnYRoot->Name = L"_btnYRoot";
+			this->_btnYRoot->Size = System::Drawing::Size(59, 36);
+			this->_btnYRoot->TabIndex = 0;
+			this->_btnYRoot->TabStop = false;
+			this->_btnYRoot->Text = L"^1/y";
+			this->_btnYRoot->UseVisualStyleBackColor = false;
+			this->_btnYRoot->Click += gcnew System::EventHandler(this, &FrmCalculator::_btnYRoot_Click);
 			// 
 			// tableLayoutPanel2
 			// 
@@ -957,16 +1219,19 @@ namespace zad9CLRedition
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(16)), static_cast<System::Int32>(static_cast<System::Byte>(16)),
+				static_cast<System::Int32>(static_cast<System::Byte>(16)));
 			this->ClientSize = System::Drawing::Size(408, 439);
 			this->Controls->Add(this->_tlpButtons);
 			this->Controls->Add(this->tableLayoutPanel2);
+			this->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(238)), static_cast<System::Int32>(static_cast<System::Byte>(238)),
+				static_cast<System::Int32>(static_cast<System::Byte>(238)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->KeyPreview = true;
 			this->MaximizeBox = false;
 			this->Name = L"FrmCalculator";
 			this->Padding = System::Windows::Forms::Padding(8);
 			this->Text = L"Epic gamer calculator 69 420";
-			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &FrmCalculator::FrmCalculator_KeyDown);
 			this->_tlpButtons->ResumeLayout(false);
 			this->tableLayoutPanel2->ResumeLayout(false);
 			this->tableLayoutPanel2->PerformLayout();
@@ -980,6 +1245,7 @@ namespace zad9CLRedition
 		System::String^ _currentExpr = L"";
 
 		TokenTypes _lastToken = TokenTypes::Number;
+		String^ _lastOperator = "";
 
 		ldbl GetCurrentNumDbl()
 		{
@@ -990,6 +1256,8 @@ namespace zad9CLRedition
 		void UpdateCurrentNumLabel()
 		{
 			_lblCurrentNum->Text = _currentNum;
+
+			_btnCE->Text = _currentNum == L"0" ? L"C" : L"CE";
 		}
 
 		// refresh UI for current expr
@@ -998,6 +1266,7 @@ namespace zad9CLRedition
 			_lblCurrentExpr->Text = _currentExpr;
 		}
 
+		// switch to 2nd button pane
 		void SwitchTo2nd()
 		{
 			_tlpButtons->SuspendLayout();
@@ -1005,7 +1274,7 @@ namespace zad9CLRedition
 			_tlpButtons->ColumnStyles[0]->Width = 16.67;
 			_tlpButtons->ColumnStyles[1]->Width = 0;
 
-			for each (Control^ control in _tlpButtons->Controls)
+			for each (Control ^ control in _tlpButtons->Controls)
 			{
 				if (_tlpButtons->GetColumn(control) == 0)
 					control->Show();
@@ -1016,8 +1285,11 @@ namespace zad9CLRedition
 			_tlpButtons->ResumeLayout();
 		}
 
+		// return to the 1st pane
 		void SwitchTo1st()
 		{
+			_tlpButtons->SuspendLayout();
+
 			_tlpButtons->ColumnStyles[0]->Width = 0;
 			_tlpButtons->ColumnStyles[1]->Width = 16.67;
 
@@ -1028,6 +1300,8 @@ namespace zad9CLRedition
 				else if (_tlpButtons->GetColumn(control) == 1)
 					control->Show();
 			}
+
+			_tlpButtons->ResumeLayout();
 		}
 
 		int GetUnclosedParenthesisCount()
@@ -1044,6 +1318,7 @@ namespace zad9CLRedition
 			return ltParCnt;
 		}
 
+		// returs true if the current expression ends with an operator
 		bool GetExprEndsWithOperator()
 		{
 			// check every operator symbol
@@ -1054,9 +1329,66 @@ namespace zad9CLRedition
 			}
 		}
 
+		// calculates the value of the last token, use this to set _currentNum after an operator is added
+		String^ CalcLastToken()
+		{
+			String^ token = L"";
+			int pos = _currentExpr->Length - 1;
+			int rtParCnt = 0;
+
+			while (pos >= 0 && (_currentExpr[pos] != L' ' || rtParCnt > 0))
+			{
+				if (_currentExpr[pos] == L')')
+					rtParCnt++;
+				else if (_currentExpr[pos] == L'(')
+					rtParCnt--;
+
+				token = _currentExpr[pos] + token;
+
+				pos--;
+			}
+
+			Expression^ expr;
+
+			if (Expression::TryParse(token, expr))
+				return expr->Calc().ToString();
+			else
+				return _currentNum;
+		}
+
+		String^ FindLastTopLevelOp()
+		{
+			String^ token = L"";
+			int pos = _currentExpr->Length - 1;
+			int rtParCnt = 0;
+
+			while (pos >= 0)
+			{
+				if (_currentExpr[pos] == L')')
+					rtParCnt++;
+				else if (_currentExpr[pos] == L'(')
+					rtParCnt--;
+
+				if (_currentExpr[pos] == L' ' && rtParCnt == 0)
+					if (Array::IndexOf(IOperator::OperatorSymbols, token) >= 0)
+						return token;
+					else
+						token = L"";
+				else
+					token = _currentExpr[pos] + token;
+
+
+				pos--;
+			}
+
+			return L"";
+		}
+
 #pragma region commands
 
-		void AppendDigit(System::String^ d)
+		// appending
+
+		void AppendDigit(String^ d)
 		{
 			if (_lastToken == TokenTypes::Equals) Clear();
 			else if (_lastToken != TokenTypes::Number) _currentNum = L"0";
@@ -1089,7 +1421,7 @@ namespace zad9CLRedition
 			UpdateCurrentNumLabel();
 		}
 
-		void AppendOperator(System::String^ op)
+		void AppendOperator(String^ op)
 		{
 			// if the last input was an operator, replace that operator with the current one
 			if (_lastToken == TokenTypes::Operator)
@@ -1102,17 +1434,23 @@ namespace zad9CLRedition
 
 			else
 			{
-				// if the last input was a closing parenthesis, don't append the current number
-				if (_lastToken != TokenTypes::RightParenthesis)
+				// if the last input was equals, set the expression to the current number
+				if (_lastToken == TokenTypes::Equals)
+					_currentExpr = _currentNum;
+
+				// if the last input was a closing parenthesis (normal or of a function), don't append the current number
+				else if (_lastToken != TokenTypes::RightParenthesis && _lastToken != TokenTypes::Function)
 					_currentExpr += _currentNum;
 
 				// always append the operator
 				_currentExpr += L" " + op + L" ";
 			}
 
+			_lastOperator = op;
 			_lastToken = TokenTypes::Operator;
 
 			UpdateCurrentExprLabel();
+			UpdateCurrentNumLabel();
 		}
 
 		void AppendLeftParenthesis()
@@ -1128,9 +1466,20 @@ namespace zad9CLRedition
 		{
 			// don't append if there are no unclosed parentheses
 			if (GetUnclosedParenthesisCount() == 0) return;
-			_currentExpr += _currentNum + L")";
+
+			// only append the current number if the last input was not an ending parenthesis
+			if (_lastToken != TokenTypes::RightParenthesis && _lastToken != TokenTypes::Function)
+				_currentExpr += _currentNum;
+			
+			_currentExpr += L")";
+
+			// set the current num to the result of this parenthesis
+			_currentNum = CalcLastToken();
+
 			_lastToken = TokenTypes::RightParenthesis;
+
 			UpdateCurrentExprLabel();
+			UpdateCurrentNumLabel();
 		}
 
 		void AppendFunction(String^ func)
@@ -1146,7 +1495,7 @@ namespace zad9CLRedition
 				int pos = _currentExpr->Length - 1;
 				int rtParCnt = 0;
 
-				while (pos > 0 || (_currentExpr[pos] == L' ' && rtParCnt == 0))
+				while (pos >= 0 && !(_currentExpr[pos] == L' ' && rtParCnt == 0))
 				{
 					if (_currentExpr[pos] == L')') rtParCnt++;
 					if (_currentExpr[pos] == L'(') rtParCnt--;
@@ -1169,10 +1518,16 @@ namespace zad9CLRedition
 				_currentExpr += func + L"(" + _currentNum + L")";
 			}
 
+			// set the current num to the result of this function
+			_currentNum = CalcLastToken();
+
 			_lastToken = TokenTypes::Function;
 
 			UpdateCurrentExprLabel();
+			UpdateCurrentNumLabel();
 		}
+
+		// setting
 
 		void SetCurrentNumToE()
 		{
@@ -1190,6 +1545,9 @@ namespace zad9CLRedition
 			UpdateCurrentNumLabel();
 		}
 
+
+		// erasing
+
 		void Backspace()
 		{
 			// if the current number only has one digit with or without a minus, set the current number to 0
@@ -1203,6 +1561,12 @@ namespace zad9CLRedition
 
 		void ClearEntry()
 		{
+			// if the last input was an equals, do a full clear
+			if (_lastToken == TokenTypes::Equals)
+			{
+				Clear();
+			}
+
 			// clear entry (current number)
 			_currentNum = "0";
 			UpdateCurrentNumLabel();
@@ -1213,8 +1577,39 @@ namespace zad9CLRedition
 			_currentExpr = L"";
 			_currentNum = L"0";
 			_lastToken = TokenTypes::Number;
+			_lastOperator = "";
 
 			UpdateCurrentExprLabel();
+			UpdateCurrentNumLabel();
+		}
+
+		void CEButton()
+		{
+			if (_currentNum == L"0" || _lastToken == TokenTypes::Equals) Clear();
+			else ClearEntry();
+		}
+
+
+		// misc
+
+		void Negate()
+		{
+			// if the last input was a closing parenthesis or a function, negate the whole parenthesis/function
+			if (_lastToken == TokenTypes::RightParenthesis || _lastToken == TokenTypes::Function)
+			{
+				AppendFunction(L"-");
+				return;
+			}
+
+			// do nothing if the number is 0
+			if (_currentNum == L"0") return;
+
+			// if the first character is a minus, remove it
+			if (_currentNum[0] == L'-') _currentNum = _currentNum->Substring(1, _currentNum->Length - 1);
+
+			// otherwise, add a minus to the start of the number
+			else _currentNum = L'-' + _currentNum;
+
 			UpdateCurrentNumLabel();
 		}
 
@@ -1229,11 +1624,24 @@ namespace zad9CLRedition
 			else if (_currentExpr == L"" || (_currentExpr->EndsWith(L")") && _lastToken == TokenTypes::Number))
 				_currentExpr = _currentNum;
 
+
 			int unclosedCount = GetUnclosedParenthesisCount();
 
 			// close missing parentheses
 			for (int i = 0; i < unclosedCount; i++)
 				_currentExpr += L")";
+
+			// handle consecutive equals presses
+			if (_lastToken == TokenTypes::Equals)
+			{
+				String^ lastTopLevelOp = FindLastTopLevelOp();
+				if (lastTopLevelOp == L"")
+					_currentExpr = _currentNum;
+				else
+					_currentExpr = _currentNum + L" " + lastTopLevelOp + L" " + CalcLastToken();
+			}
+
+			UpdateCurrentExprLabel();
 
 			Expression^ expr;
 			if (Expression::TryParse(_currentExpr, expr))
@@ -1241,16 +1649,15 @@ namespace zad9CLRedition
 				try
 				{
 					_currentNum = expr->Calc().ToString();
-					_currentExpr += L" = ";
+					_lblCurrentExpr->Text += L" = ";
 					_lastToken = TokenTypes::Equals;
 				}
 				catch (Exception^ ex)
 				{
-					_currentNum = ex->Message;
+					_currentNum = "Invalid input!";
 				}
 
 				UpdateCurrentNumLabel();
-				UpdateCurrentExprLabel();
 			}
 			else
 			{
@@ -1262,26 +1669,38 @@ namespace zad9CLRedition
 
 #pragma endregion
 
+
 #pragma region event handlers
 
 	protected:
 
+		// handle all key presses on the form
 		virtual bool ProcessCmdKey(Message% msg, Keys k) override
 		{
+
+			// list of shortcuts here:
+			// https://support.microsoft.com/en-us/help/13805/windows-keyboard-shortcuts-in-apps
+
+			// here so breakpoints during debug time don't trigger on just shift being pressed, should be commented out later
 			if (k == (Keys::ShiftKey | Keys::Shift)) return true;
 
-			// if the pressed key is backspace, erase the last character
+
+			// special keys
+
 			else if (k == Keys::Back)
 				Backspace();
 
 			else if (k == Keys::Delete)
-				ClearEntry();
+				ClearEntry(); // delete always clears entry instead of pressing the CE button
 
 			else if (k == Keys::Escape)
 				Clear();
 
 			else if (k == Keys::Enter || k == Keys::Return)
 				Calc();
+
+
+			// operator keys
 
 			else if (k == Keys::Multiply || (k == (Keys::D8 | Keys::Shift)))
 				AppendOperator(L"*");
@@ -1295,30 +1714,85 @@ namespace zad9CLRedition
 			else if (k == Keys::Divide)
 				AppendOperator(L"/");
 
-			else if (k == (Keys::D1 | Keys::Shift))
-				AppendFunction(L"fact");
+			else if (k == Keys::OemPipe | k == (Keys::OemBackslash | Keys::Shift) | k == (Keys::Oem5 | Keys::Shift))
+				AppendFunction(L"abs");
 
-			else if (k == (Keys::D5 | Keys::Shift))
-				AppendOperator(L"mod");
 
-			else if (k == (Keys::D6 | Keys::Shift))
+			// letter keys + modifiers
+
+			else if (k == (Keys::E | Keys::Shift))
+				SetCurrentNumToE();
+
+			else if (k == (Keys::G | Keys::Control))
+				AppendFunction(L"10^");
+
+			else if (k == (Keys::N | Keys::Control))
+				AppendFunction(L"e^");
+
+			else if (k == (Keys::Y | Keys::Control))
+				AppendFunction(L"yroot");
+
+
+			// letter keys
+
+			else if (k == Keys::L)
+				AppendFunction(L"log");
+
+			else if (k == Keys::N)
+				AppendFunction(L"ln");
+
+			else if (k == Keys::P)
+				SetCurrentNumToPi();
+
+			else if (k == Keys::Q)
+				AppendFunction(L"sqrt");
+
+			else if (k == Keys::Q)
+				AppendFunction(L"1/");
+
+			else if (k == Keys::Y)
 				AppendOperator(L"^");
 
-			else if (k == (Keys::D9 | Keys::Shift))
+
+			// function keys
+
+			else if (k == Keys::F9)
+				Negate();
+
+
+			// number keys + shift
+
+			else if (k == (Keys::D1 | Keys::Shift)) // !
+				AppendFunction(L"fact");
+
+			else if (k == (Keys::D2 | Keys::Shift)) // @ (shift + 2)
+				AppendFunction(L"sqrt");
+
+			else if (k == (Keys::D3 | Keys::Shift)) // #
+				AppendFunction(L"cube");
+
+			else if (k == (Keys::D5 | Keys::Shift)) // %
+				AppendOperator(L"mod");
+
+			else if (k == (Keys::D6 | Keys::Shift)) // ^
+				AppendOperator(L"^");
+
+			else if (k == (Keys::D9 | Keys::Shift))	// (
 				AppendLeftParenthesis();
 
-			else if (k == (Keys::D0 | Keys::Shift))
+			else if (k == (Keys::D0 | Keys::Shift)) // )
 				AppendRightParenthesis();
 
-			// if the pressed key is a number key, append it
+
+			// number keys
 			else if (k >= Keys::D0 && k <= Keys::D9)
 				AppendDigit(((int)(k - Keys::D0)).ToString());
 
-			// make it also work for numpad keys
+			// numpad number keys
 			else if (k >= Keys::NumPad0 && k <= Keys::NumPad9)
 				AppendDigit(((int)(k - Keys::NumPad0)).ToString());
 
-			// if the pressed key is comma or point, append a decimal point
+			// decimal point keys
 			else if (k == Keys::OemPeriod || k == Keys::Oemcomma || k == Keys::Decimal)
 				AppendPoint();
 
@@ -1327,69 +1801,25 @@ namespace zad9CLRedition
 
 	private:
 
-		// handle all key presses on the form
-		System::Void FrmCalculator_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
+		// handle the equals button
+		System::Void _btnEquals_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (e->KeyCode == Keys::ShiftKey) return;
-
-			// if the pressed key is backspace, erase the last character
-			else if (e->KeyCode == Keys::Back)
-				Backspace();
-
-			else if (e->KeyCode == Keys::Delete)
-				ClearEntry();
-
-			else if (e->KeyCode == Keys::Escape)
-				Clear();
-
-			else if (e->KeyCode == Keys::Enter || e->KeyCode == Keys::Return)
-				Calc();
-
-			else if (e->KeyCode == Keys::Multiply || (e->KeyCode == Keys::D8 && e->Modifiers.HasFlag(Keys::Shift)))
-				AppendOperator(L"*");
-
-			else if (e->KeyCode == Keys::Oemplus || e->KeyCode == Keys::Add)
-				AppendOperator(L"+");
-
-			else if (e->KeyCode == Keys::OemMinus || e->KeyCode == Keys::Subtract)
-				AppendOperator(L"-");
-
-			else if (e->KeyCode == Keys::Divide)
-				AppendOperator(L"/");
-
-			// if the pressed key is a number key, append it
-			else if (e->KeyValue >= L'0' && e->KeyValue <= L'9')
-				AppendDigit(((wchar_t)e->KeyValue).ToString());
-
-			// make it also work for numpad keys
-			else if (e->KeyCode >= Keys::NumPad0 && e->KeyCode <= Keys::NumPad9)
-				AppendDigit(((int)(e->KeyCode - Keys::NumPad0)).ToString());
-
-			// if the pressed key is comma or point, append a decimal point
-			else if (e->KeyCode == Keys::OemPeriod || e->KeyCode == Keys::Oemcomma)
-				AppendPoint();
+			Calc();
 		}
+
+
+		// handle basic input and erasing
 
 		System::Void _btnNumber_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			// get the clicked button
 			Button^ b = safe_cast<Button^>(sender);
-
 			AppendDigit(b->Text);
 		}
 
 		System::Void _btnPlusMinus_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			// do nothing if the number is 0
-			if (_currentNum == "0") return;
-
-			// if the first character is a minus, remove it
-			if (_currentNum[0] == '-') _currentNum = _currentNum->Substring(1, _currentNum->Length - 1);
-
-			// otherwise, add a minus to the start of the string
-			else _currentNum = L'-' + _currentNum;
-
-			UpdateCurrentNumLabel();
+			Negate();
 		}
 
 		System::Void _btnBackspace_Click(System::Object^ sender, System::EventArgs^ e)
@@ -1404,8 +1834,16 @@ namespace zad9CLRedition
 
 		System::Void _btnCE_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			ClearEntry();
+			CEButton();
 		}
+
+		System::Void _btnModulo_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			AppendOperator("mod");
+		}
+
+
+		// handle basic operators
 
 		System::Void _btnPlus_Click(System::Object^ sender, System::EventArgs^ e)
 		{
@@ -1427,18 +1865,8 @@ namespace zad9CLRedition
 			AppendOperator(L"/");
 		}
 
-		System::Void _btnInvert_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-		}
 
-		System::Void _btnSqrt_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-		}
-
-		System::Void _btnEquals_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-			Calc();
-		}
+		// handle parentheses
 
 		System::Void _btnLeftParenthesis_Click(System::Object^ sender, System::EventArgs^ e)
 		{
@@ -1450,6 +1878,14 @@ namespace zad9CLRedition
 			AppendRightParenthesis();
 		}
 
+
+		// handle other functions
+
+		System::Void _btnInvert_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			AppendFunction("1/");
+		}
+
 		System::Void _btnFactorial_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			AppendFunction(L"fact");
@@ -1459,14 +1895,9 @@ namespace zad9CLRedition
 		{
 		}
 
-		System::Void _btnModulo_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-			AppendOperator("mod");
-		}
-
 		System::Void _btnAbs_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			AppendFunction("abs");
+			AppendFunction(L"abs");
 		}
 
 		System::Void _btnE_Click(System::Object^ sender, System::EventArgs^ e)
@@ -1479,6 +1910,9 @@ namespace zad9CLRedition
 			SetCurrentNumToPi();
 		}
 
+
+		// switch panes
+
 		System::Void _btn2ndOn_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			SwitchTo2nd();
@@ -1489,50 +1923,73 @@ namespace zad9CLRedition
 			SwitchTo1st();
 		}
 
-		System::Void _btnCubeRoot_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-		}
 
-		System::Void _btn2ToX_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-		}
-
-		System::Void _btnEToX_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-		}
+		// handle 1st pane functions
 
 		System::Void _btnSqr_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-		}
-
-		System::Void _btnPow_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-		}
-
-		System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-		}
-
-		System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-		}
-
-		System::Void _btnLn_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-		}
-
-		System::Void _btnLog_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-		}
-
-		System::Void _btn10ToX_Click(System::Object^ sender, System::EventArgs^ e)
-		{
+			AppendFunction(L"sqr");
 		}
 
 		System::Void _btnCube_Click(System::Object^ sender, System::EventArgs^ e)
 		{
+			AppendFunction(L"cube");
+		}
+
+		System::Void _btnPow_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			AppendOperator(L"^");
+		}
+
+		System::Void _btn10ToX_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			AppendFunction(L"10^");
+		}
+
+		System::Void _btnLog_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			AppendFunction(L"log");
+		}
+
+		System::Void _btnLn_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			AppendFunction(L"ln");
+		}
+
+
+		// handle 2nd pane functions
+
+		System::Void _btnSqrt_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			AppendFunction(L"sqrt");
+		}
+
+		System::Void _btnCubeRoot_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			AppendFunction(L"cuberoot");
+		}
+
+		System::Void _btnYRoot_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			AppendOperator("yroot");
+		}
+
+		System::Void _btn2ToX_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			AppendFunction("2^");
+		}
+
+		System::Void _btnLogYX_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			AppendOperator(L"base_log");
+		}
+
+		System::Void _btnEToX_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			AppendFunction("e^");
 		}
 
 #pragma endregion
+
 	};
 }

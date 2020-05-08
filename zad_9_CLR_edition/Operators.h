@@ -4,7 +4,6 @@
 ref class AdditionOperator : public IOperator
 {
 public:
-	static String^ Symbol = "+";
 	virtual int GetPrecedence() override { return 2; }
 	virtual double Calc(ICalculable^ left, ICalculable^ right) override;
 };
@@ -12,7 +11,6 @@ public:
 ref class SubstractionOperator : public IOperator
 {
 public:
-	static String^ Symbol = "-";
 	virtual int GetPrecedence() override { return 2; }
 	virtual double Calc(ICalculable^ left, ICalculable^ right) override;
 };
@@ -21,7 +19,6 @@ public:
 ref class MultiplicationOperator : public IOperator
 {
 public:
-	static String^ Symbol = "*";
 	virtual int GetPrecedence() override { return 1; }
 	virtual double Calc(ICalculable^ left, ICalculable^ right) override;
 };
@@ -29,7 +26,6 @@ public:
 ref class DivisionOperator : public IOperator
 {
 public:
-	static String^ Symbol = "/";
 	virtual int GetPrecedence() override { return 1; }
 	virtual double Calc(ICalculable^ left, ICalculable^ right) override;
 };
@@ -37,7 +33,6 @@ public:
 ref class ModuloOperator : public IOperator
 {
 public:
-	static String^ Symbol = "mod";
 	virtual int GetPrecedence() override { return 1; }
 	virtual double Calc(ICalculable^ left, ICalculable^ right) override;
 };
@@ -46,7 +41,20 @@ public:
 ref class ExpotentiationOperator : public IOperator
 {
 public:
-	static String^ Symbol = "^";
 	virtual int GetPrecedence() override { return 0; }
+	virtual double Calc(ICalculable^ left, ICalculable^ right) override;
+};
+
+ref class BaseLogOperator : public IOperator
+{
+public:
+	virtual int GetPrecedence() override { return -1; }
+	virtual double Calc(ICalculable^ left, ICalculable^ right) override;
+};
+
+ref class YRootOperator : public IOperator
+{
+public:
+	virtual int GetPrecedence() override { return -1; }
 	virtual double Calc(ICalculable^ left, ICalculable^ right) override;
 };

@@ -2,7 +2,7 @@
 #include "Expression.h"
 #include "Constant.h"
 #include "Function.h"
-#include "ParseException.h"
+#include "Exceptions.h"
 
 ICalculable^ ICalculable::ParseToken(String^ token)
 {
