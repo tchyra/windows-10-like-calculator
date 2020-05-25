@@ -11,5 +11,9 @@ public:
 ref class CalcException : public Exception
 {
 public:
-	CalcException(String^ message) : Exception(message) {}
+	String^ DisplayMessage;
+	CalcException(String^ message, String^ displayMessage) : Exception(message)
+	{
+		DisplayMessage = displayMessage;
+	}
 };

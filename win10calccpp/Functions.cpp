@@ -14,7 +14,7 @@ inline double cube(double x) { return x * x * x; }
 double SqrtFunction::Calc()
 {
 	double arg = Argument->Calc();
-	if (arg < 0) throw gcnew CalcException(L"Argument passed to sqrt() can't be negative.");
+	if (arg < 0) throw gcnew CalcException(L"Argument passed to sqrt() can't be negative.", L"Invalid input");
 	return Math::Sqrt(arg);
 }
 
@@ -32,7 +32,7 @@ double FactorialFunction::Calc() { return tgamma(Argument->Calc() + 1); }
 double LnFunction::Calc()
 {
 	double arg = Argument->Calc();
-	if (arg <= 0) throw gcnew CalcException(L"Argument passed to ln() can't be negative.");
+	if (arg <= 0) throw gcnew CalcException(L"Argument passed to ln() can't be negative.", L"Invalid input");
 	return Math::Log(Argument->Calc());
 }
 
@@ -40,7 +40,7 @@ double LnFunction::Calc()
 double LogFunction::Calc()
 {
 	double arg = Argument->Calc();
-	if (arg <= 0) throw gcnew CalcException(L"Argument passed to log() can't be negative.");
+	if (arg <= 0) throw gcnew CalcException(L"Argument passed to log() can't be negative.", L"Invalid input");
 	return Math::Log10(Argument->Calc());
 }
 
@@ -54,6 +54,6 @@ double EToXFunction::Calc() { return Math::Pow(Math::E, Argument->Calc()); }
 double ReciprocalFunction::Calc()
 {
 	double arg = Argument->Calc();
-	if (arg == 0) throw gcnew CalcException(L"Division by 0 - Argument passed to 1/() can't be equal to 0.");
+	if (arg == 0) throw gcnew CalcException(L"Division by 0 - Argument passed to 1/() can't be equal to 0.", L"Cannot divide by 0");
 	return 1.0 / Argument->Calc();
 }

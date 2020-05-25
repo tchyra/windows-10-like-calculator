@@ -1,5 +1,4 @@
 #include "FrmCalculator.h"
-#include "defs.h"
 
 using namespace System;
 using namespace System::Windows::Forms;

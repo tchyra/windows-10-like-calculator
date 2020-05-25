@@ -10,7 +10,7 @@ bool Function::TryParse(String^ token, Function^% result)
 		result = gcnew SqrtFunction(ICalculable::ParseToken(token->Substring(5, token->Length - 6)));
 
 	else if (token->StartsWith(L"sqr("))
-		result = gcnew SqrFunction(ICalculable::ParseToken(token->Substring(5, token->Length - 6)));
+		result = gcnew SqrFunction(ICalculable::ParseToken(token->Substring(4, token->Length - 5)));
 
 	else if (token->StartsWith(L"abs("))
 		result = gcnew AbsFunction(ICalculable::ParseToken(token->Substring(4, token->Length - 5)));

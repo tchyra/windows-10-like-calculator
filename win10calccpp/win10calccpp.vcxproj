@@ -92,6 +92,8 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>Main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -121,13 +123,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Operators.cpp" />
-    <ClCompile Include="Constant.cpp" />
     <ClCompile Include="Expression.cpp" />
     <ClCompile Include="FrmCalculator.cpp" />
     <ClCompile Include="Function.cpp" />
     <ClCompile Include="ICalculable.cpp" />
     <ClCompile Include="IOperator.cpp" />
-    <ClCompile Include="Exceptions.cpp" />
     <ClCompile Include="Functions.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -136,7 +136,6 @@
     </ClInclude>
     <ClInclude Include="Operators.h" />
     <ClInclude Include="Constant.h" />
-    <ClInclude Include="defs.h" />
     <ClInclude Include="Expression.h" />
     <ClInclude Include="Function.h" />
     <ClInclude Include="ICalculable.h" />
