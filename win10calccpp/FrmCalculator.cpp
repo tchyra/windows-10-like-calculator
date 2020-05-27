@@ -9,6 +9,6 @@ void Main(array<String^>^ args)
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 
-	zad9CLRedition::FrmCalculator form;
+	win10calccpp::FrmCalculator form;
 	Application::Run(% form);
 }

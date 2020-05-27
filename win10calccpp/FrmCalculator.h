@@ -11,7 +11,7 @@
 
 using namespace System;
 
-namespace zad9CLRedition
+namespace win10calccpp
 {
 	using namespace std;
 	using namespace System;
@@ -3361,7 +3361,7 @@ namespace zad9CLRedition
 			else if (k == Keys::Escape)
 				Clear();
 
-			else if (k == Keys::Enter || k == Keys::Return)
+			else if (k == Keys::Enter || k == Keys::Return || k == Keys::Oemplus)
 				Calc();
 
 
@@ -3370,7 +3370,7 @@ namespace zad9CLRedition
 			else if (k == Keys::Multiply || (k == (Keys::D8 | Keys::Shift)))
 				AppendOperator(L"*");
 
-			else if (k == Keys::Oemplus || k == Keys::Add || k == (Keys::Oemplus | Keys::Shift))
+			else if (k == Keys::Add || k == (Keys::Oemplus | Keys::Shift))
 				AppendOperator(L"+");
 
 			else if (k == Keys::OemMinus || k == Keys::Subtract)
