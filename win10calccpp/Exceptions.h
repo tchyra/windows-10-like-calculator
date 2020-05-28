@@ -2,6 +2,8 @@
 
 using namespace System;
 
+// this class contains custom exception classes for parsing and calculating
+
 ref class ParseException : public Exception
 {
 public:

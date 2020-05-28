@@ -3,6 +3,7 @@
 #include "IOperator.h"
 #include "Constant.h"
 
+// calculates this expression
 double Expression::Calc()
 {
 	// find operator of highest priority by going left to right
@@ -36,6 +37,10 @@ double Expression::Calc()
 	return Calculables[0]->Calc();
 }
 
+// splits an expression string into a list of tokens (these can be constants, functions, expressions or operators)
+// used in Expression::TryParse
+// sample expression:	(2 + 5) * sqrt(5 / 2) + 8
+// parsed tokens:		"2 + 5", "*", "sqrt(5 / 2)", "+", "8"
 List<String^>^ Expression::ParseTokens(String^ input)
 {
 	List<String^>^ result = gcnew List<String^>();
@@ -103,10 +108,12 @@ List<String^>^ Expression::ParseTokens(String^ input)
 	return result;
 }
 
+// tries to create an expression object from an expression string
 bool Expression::TryParse(String^ input, Expression^% result)
 {
 	result = gcnew Expression();
-	// step 1: split input string into tokens
+
+	// split input string into tokens
 	List<String^>^ tokens;
 	tokens = ParseTokens(input);
 
@@ -124,13 +131,16 @@ bool Expression::TryParse(String^ input, Expression^% result)
 			result->Operators->Add(IOperator::ParseToken(tokens[i]));
 		}
 
+		// mark parsing as failed if the number of calculables isn't greater by 1 than the number of operators
 		if (result->Calculables->Count != result->Operators->Count + 1)
 			return false;
 
+		// mark parsing as successful
 		return true;
 	}
 	catch (const ParseException^ ex)
 	{
+		// mark parsing as failed if a ParseException was thrown
 		return false;
 	}
 }

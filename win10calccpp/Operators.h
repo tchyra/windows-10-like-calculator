@@ -1,6 +1,9 @@
 #pragma once
 #include "IOperator.h"
 
+// this file contains declarations for all available operators
+// every operator implements the base IOperator interface
+
 ref class AdditionOperator : public IOperator
 {
 public:

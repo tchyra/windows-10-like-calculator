@@ -1,5 +1,10 @@
 #pragma once
 #include "ICalculable.h"
+
+// base class for Constant calculables
+// this basically wraps a double
+// sample constant: 24.56
+
 ref class Constant : public ICalculable
 {
 public:

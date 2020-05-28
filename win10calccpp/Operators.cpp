@@ -5,6 +5,9 @@
 
 using namespace std;
 
+// this file defines methods used to calculate values for all available operators.
+// every operator class should be declared in Operators.h and then it's calc method should be defined here.
+
 double AdditionOperator::Calc(ICalculable^ left, ICalculable^ right)
 {
 	return left->Calc() + right->Calc();

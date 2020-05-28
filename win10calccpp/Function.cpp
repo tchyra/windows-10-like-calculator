@@ -1,8 +1,8 @@
 #include "Function.h"
 #include "Functions.h"
 
-Function::Function(ICalculable^ arg) { Argument = arg; }
-
+// this function is used to try and create a function object from a string token, and is very ugly about it.
+// each condition here checks if the token starts with a [name](, and if it does, parses it's contents ([name]([contents])) into a calculable that then gets used in the function's constructor.
 bool Function::TryParse(String^ token, Function^% result)
 {
 	result = nullptr;
@@ -45,5 +45,6 @@ bool Function::TryParse(String^ token, Function^% result)
 	else if (token->StartsWith(L"1/("))
 		result = gcnew ReciprocalFunction(ICalculable::ParseToken(token->Substring(3, token->Length - 4)));
 
+	// return true if a function object has been created, false otherwise.
 	return result != nullptr;
 }

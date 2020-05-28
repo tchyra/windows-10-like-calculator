@@ -2,6 +2,9 @@
 #include "Operators.h"
 #include "Exceptions.h"
 
+
+// creates an operator object from a string token
+// throws ParseException when the given token is not an operator
 IOperator^ IOperator::ParseToken(String^ token)
 {
 	if (token == L"+")

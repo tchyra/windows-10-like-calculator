@@ -9,8 +9,6 @@
 #include "Expression.h"
 #include "Exceptions.h"
 
-using namespace System;
-
 namespace win10calccpp
 {
 	using namespace std;
@@ -30,24 +28,24 @@ namespace win10calccpp
 	{
 
 	public:
+		
 		FrmCalculator(void)
 		{
-
+			// call this first as this initializes all controls
 			InitializeComponent();
 
-			// stop after initializing component to hopefully fix the winforms designer
+			// stop here if the constructor is called by the designer, because otherwise weird things might happen
 			if (DesignMode) return;
 
-			// only trigger a relayout once
-			SuspendLayout();
+			SuspendLayout();	// pause UI updates
 
-			// set initial width and height
+			// set initial width and height, see comment on the W and H consts
 			Width = W;
 			Height = H;
 
-			ResumeLayout();
+			ResumeLayout();		// resume UI updates
 
-			// initialize UI, essentially, bit of a lazy way but this program is long enough as is
+			// make sure the UI reflects a clean start state, essentially, bit of a lazy way but I can't be arsed to make separate init functions
 			Clear();
 			SwitchTo1st();
 			UpdateCurrentMemUI();
@@ -2419,14 +2417,20 @@ namespace win10calccpp
 
 	private:
 
+		// consts used in the constructor to resize the form at startup
+		// this is done this way to create one form layout for both standard and scientific modes that isn't too hard to edit in the designer 
+		// basic idea is create a large form with both layouts, hide one of them and make the form smaller at startup, then show/hide layouts to switch modes (SetScientificMode())
+		// if these consts are to be changed, the layouts in the designer also need to be changed so the panel sizes don't break.
 		const int W = 350, H = 580;
 
 		// global variables
 
-		String^ _currentNum = L"0";
-		String^ _currentExpr = L"";
-		String^ _currentMem = L"";
+		String^ _currentNum = L"0";		// holds current number input
+		String^ _currentExpr = L"";		// holds current expression
+		String^ _currentMem = L"";		// holds current memory contents
 
+		// special variable updated everytime the user appends something or calculates the expression
+		// this is used to change the behaviour of certain commands, for example appending an operator when the last token is an operator will replace the previous operator instead of appending a new one
 		TokenTypes _lastToken = TokenTypes::Equals;
 
 		// flags
@@ -2439,7 +2443,7 @@ namespace win10calccpp
 
 		// misc utilities
 
-		// get a double string but run through double parsing and back to string, trailing zeroes and scientific notation unless FE is enabled
+		// get a double string but ran through double parsing and back to string, removes trailing zeroes and scientific notation (when possible) unless FE is enabled
 		String^ GetProcessedDouble(String^ num)
 		{
 			if (_FE)
@@ -2462,11 +2466,13 @@ namespace win10calccpp
 				return double::Parse(num).ToString()->ToLower();
 		}
 
+		// quick wrapper function to avoid calling the above function with the current number manually
 		String^ GetCurrentNumProcessed()
 		{
 			return GetProcessedDouble(_currentNum);
 		}
 
+		// counts left parentheses without a matching right parenthesis, used before calculating to insert missing parentheses
 		int GetUnclosedParenthesisCount()
 		{
 			int ltParCnt;
@@ -2490,10 +2496,12 @@ namespace win10calccpp
 				if (_currentExpr->EndsWith(IOperator::OperatorSymbols[i] + L" "))
 					return true;
 			}
+
+			return false;
 		}
 
-		// calculates the value of the last token, use this to set _currentNum after an operator is added
-		// can throw a CalcException on div by 0 and other math heresies
+		// calculates the value of the last token in the current expression, use this to set _currentNum after an operator or a function or a closing parenthesis is added
+		// can throw a CalcException on div by 0 and other math heresies, so the caller should always wrap this in a try-catch
 		String^ CalcLastToken()
 		{
 			String^ token = L"";
@@ -2523,6 +2531,7 @@ namespace win10calccpp
 				return _currentNum;
 		}
 
+		// finds the symbol of the latest operator outside of a function or parenthesis in the current expression
 		String^ FindLastTopLevelOp()
 		{
 			String^ token = L"";
@@ -2551,6 +2560,8 @@ namespace win10calccpp
 			return L"";
 		}
 
+		// removes the last constant, function or parenthesis from the current expression, unless it is the only token.
+		// this is used when the last thing in the current expression is a ) and the user decided to input a number or (
 		void EraseLastToken()
 		{
 			int pos = _currentExpr->Length - 1;
@@ -2575,8 +2586,9 @@ namespace win10calccpp
 		}
 
 
-		// UI related
+		// UI related utilities
 
+		// sets the current calculator mode, using a boolean since we only support two modes
 		void SetScientificMode(bool mode)
 		{
 			// do nothing if the mode is not being switched
@@ -2605,7 +2617,7 @@ namespace win10calccpp
 			ResumeLayout();
 		}
 
-		// refresh UI for current num
+		// refresh UI for current num, call after _currentNum has changed
 		void UpdateCurrentNumLabel()
 		{
 			// current num string should have a decimal separator every 3 digits
@@ -2630,13 +2642,13 @@ namespace win10calccpp
 			_btnCE->Text = _currentNum == L"0" ? L"C" : L"CE";
 		}
 
-		// refresh UI for current expr
+		// refresh UI for current expr, call after _currentExpr has changed
 		void UpdateCurrentExprLabel()
 		{
 			_lblCurrentExpr->Text = _currentExpr;
 		}
 
-		// refresh UI for current mem
+		// refresh UI for current mem, call after _currentMem has changed
 		void UpdateCurrentMemUI()
 		{
 			// scientific mode buttons
@@ -2650,32 +2662,33 @@ namespace win10calccpp
 			SetButtonEnabled(_btnStanMemDropdown, _currentMem != L"");
 		}
 
-		// switch to 2nd button pane
+		// switch to 2nd button pane in scientific mode
 		void SwitchTo2nd()
 		{
-			_tlpSciButtons->SuspendLayout();
+			_tlpSciButtons->SuspendLayout(); // pause UI updates
 
-			_tlpSciButtons->ColumnStyles[0]->Width = 16.67;
-			_tlpSciButtons->ColumnStyles[1]->Width = 0;
+			_tlpSciButtons->ColumnStyles[0]->Width = 16.67f;	// set 1st column's width to 1/6
+			_tlpSciButtons->ColumnStyles[1]->Width = 0.0f;		// set 2nd column's width to 0
 
-			for each (Control ^ control in _tlpSciButtons->Controls)
+			for each (Control ^ control in _tlpSciButtons->Controls)	// go through every control inside the tablelayoutpanel holding scientific mode buttons
 			{
-				if (_tlpSciButtons->GetColumn(control) == 0)
+				if (_tlpSciButtons->GetColumn(control) == 0)			// if the button is in the first column, show it
 					control->Show();
-				else if (_tlpSciButtons->GetColumn(control) == 1)
+				else if (_tlpSciButtons->GetColumn(control) == 1)		// if the button is in the second column, hide it
 					control->Hide();
 			}
 
-			_tlpSciButtons->ResumeLayout();
+			_tlpSciButtons->ResumeLayout(); // update UI
 		}
 
-		// return to the 1st pane
+		// switch to the 1st pane in scientific mode
 		void SwitchTo1st()
 		{
+			// see comments in SwitchTo2nd above, this is the same thing but for the 2nd column. could be abstracted into one function, but I can't be arsed.
 			_tlpSciButtons->SuspendLayout();
 
-			_tlpSciButtons->ColumnStyles[0]->Width = 0;
-			_tlpSciButtons->ColumnStyles[1]->Width = 16.67;
+			_tlpSciButtons->ColumnStyles[0]->Width = 0.0f;
+			_tlpSciButtons->ColumnStyles[1]->Width = 16.67f;
 
 			for each (Control ^ control in _tlpSciButtons->Controls)
 			{
@@ -2688,14 +2701,15 @@ namespace win10calccpp
 			_tlpSciButtons->ResumeLayout();
 		}
 
-		// custom function to disable buttons and keep the text colour, but the keep text colour part doesn't work
+		// custom function to disable buttons and keep the text colour, but the keep text colour part doesn't work, whoops
 		void SetButtonEnabled(Button^ btn, bool enabled)
 		{
 			btn->Enabled = enabled;
-			btn->ForeColor = enabled ? Color::White : Color::Red;
+			//btn->ForeColor = enabled ? Color::White : Color::Red;
 		}
 
-		// custom function to simplify setting buttons to be coloured or back to normal, intended to be used with the mode buttons
+		// custom function to simplify setting buttons to be coloured or back to normal, intended to be used with the mode buttons up top, so the values are hardcoded in.
+		// can't be arsed to write a universal function for just 2 buttons.
 		void SetButtonActive(Button^ btn, bool active)
 		{
 			btn->BackColor = active ? Color::FromArgb(69, 98, 128) : Color::FromArgb(16, 16, 16);
@@ -2703,6 +2717,8 @@ namespace win10calccpp
 			btn->FlatAppearance->MouseDownBackColor = active ? Color::FromArgb(24, 35, 46) : Color::FromArgb(0, 0, 0);
 		}
 
+		// update UI after an error like div by 0 or sqrt(-1)
+		// disables most buttons, displays an error message in the currentnum label and sets the error flag. call this from a catch
 		void DisplayError(String^ message)
 		{
 			// bypass the label update function as that would add commas every 3 letters
@@ -2710,11 +2726,12 @@ namespace win10calccpp
 			_error = true; // set the error flag
 
 			SuspendLayout(); // pause UI updates
-			ActiveControl = _lblCurrentExpr; // set the active control to the label so there's no red focus outline
+			ActiveControl = _lblCurrentExpr; // set the active control to a label so there's no red focus outline
 			SetChildButtonsEnabled(this, !_error); // enable or disable all controls
 			ResumeLayout(); // resume UI updates
 		}
 
+		// recursively disable all child controls that are buttons, unless their tag is "alwaysactive". used to quickly disable/enable all buttons that should be disabled after an error.
 		void SetChildButtonsEnabled(Control^ container, bool enabled)
 		{
 			for each (Control ^ control in container->Controls)
@@ -2788,6 +2805,12 @@ namespace win10calccpp
 
 		void AppendOperator(String^ op)
 		{
+			// functions are parts of expressions that look something like [subexpression] operator [subexpression]
+			// because they have a consistent format, this one function is enough to append any operator the calculator uses, from + to y_root
+			// there is no check for this, but this function shouldn't be used with operators that are not defined in the IOperator.h, IOperator.cpp, Operators.cpp and Operators.h files, because then parsing will break and that's obviously bad
+			// as with functions, the process of adding a new operator is a bit too complex for my taste but it's faster to add them in this way than come up with a way that makes it easier to add new ones. this'd be better in c#.
+
+
 			// do nothing if there was an error
 			if (_error) return;
 
@@ -2872,10 +2895,15 @@ namespace win10calccpp
 
 		void AppendFunction(String^ func)
 		{
+			// functions are parts of expressions that look something like name([subexpression])
+			// because they have a consistent format, this one function is enough to append any function the calculator uses, from sqrt() to ln()
+			// there is no check for this, but this function shouldn't be used with functions that are not defined in the Function.cpp, Functions.h and Functions.cpp files, because then parsing will break and that's obviously bad
+			// as with operators, the process of adding a new function is a bit too complex for my taste but it's faster to add them in this way than come up with a way that makes it easier to add new ones. this'd be better in c#.
+
 			// do nothing if there was an error
 			if (_error) return;
 
-			// if the previous operation calculated a result, execute the function on that result
+			// if the previous operation calculated a result, append the function for that result
 			if (_lastToken == TokenTypes::Equals)
 				_currentExpr = func + L"(" + GetCurrentNumProcessed() + L")";
 
@@ -3159,8 +3187,10 @@ namespace win10calccpp
 			// do nothing if there was an error
 			if (_error) return;
 
+			// show a messagebox containing the current memory
 			MessageBox::Show(_currentMem == L"" ? L"Nothing in memory." : _currentMem, L"Memory");
 		}
+
 
 		// misc
 
@@ -3319,7 +3349,7 @@ namespace win10calccpp
 				{
 					DisplayError(ex->DisplayMessage);
 				}
-				catch (Exception^ ex)
+				catch (Exception^)
 				{
 					DisplayError(L"Unknown error");
 				}
@@ -3379,7 +3409,7 @@ namespace win10calccpp
 			else if (k == Keys::Oem2 || k == Keys::Divide) // Oem2 is the main keyboard slash key. go figure.
 				AppendOperator(L"/");
 
-			else if ((k == Keys::OemPipe | k == (Keys::OemBackslash | Keys::Shift) | k == (Keys::Oem5 | Keys::Shift)) && _scientificMode) // only available in scientific mode
+			else if ((k == Keys::OemPipe || k == (Keys::OemBackslash | Keys::Shift) || k == (Keys::Oem5 | Keys::Shift)) && _scientificMode) // only available in scientific mode
 				AppendFunction(L"abs");
 
 

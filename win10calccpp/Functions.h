@@ -3,6 +3,7 @@
 #include "Function.h"
 
 // this file contains declaractions for all functions available within the calculator.
+// every function derives from the base abstract Function class and calls its base constructor and also has a Calc() function.
 
 // x^1/2
 ref class SqrtFunction : public Function
